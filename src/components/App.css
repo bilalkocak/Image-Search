@@ -1,0 +1,52 @@
+.App {
+  text-align: center;
+  background-color: #050417;
+}
+
+.App-header {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.logo{
+  background: linear-gradient(333.23deg, #2A2B8D -16.84%, #2B2F8F -12.31%, #559BD1 119.72%);
+  border-radius: 26px;
+  height: 70px;
+  width: 70px;
+  margin-bottom: 14px;
+}
+
+.logo svg{
+  margin: 17px 15px;
+}
+
+.imageBold{
+  font-size: 36px;
+}
+
+.searchArea{
+  margin-top: 51px;
+}
+
+.searchArea form input {
+  width: 360px;
+  height: 20px;
+  border-radius: 4px;
+  margin-top: 20px;
+  padding: 15px 20px;
+
+}
+
+.searchArea form select {
+  width: 400px;
+  height: 50px;
+  border-radius: 4px;
+  margin-top: 20px;
+}
+
+
