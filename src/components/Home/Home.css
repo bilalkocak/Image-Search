@@ -42,11 +42,39 @@
 
 }
 
-.searchArea form select {
+.categorySelect {
   width: 400px;
   height: 50px;
   border-radius: 4px;
   margin-top: 20px;
+  -webkit-appearance: none; /* WebKit */
+  -moz-appearance: none; /* Mozilla */
+  appearance: none; /* CSS3 */
+  padding-right: 25px;
+  background-color: #fff;
+  background-image: url(../../images/arrow.svg);
+  background-position: top 20px right 10px;
+  background-repeat: no-repeat;
+
+}
+
+.searchButton{
+  width: 246px;
+  margin-top: 75px;
+  background: #2A2B8D;
+  border-radius: 25px;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: 1px;
+  font-weight: bold;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  cursor: pointer;
+  font-family: Open Sans, sans-serif;
+}
+
+.searchButton:hover{
+  opacity: 0.9;
 }
 
 
