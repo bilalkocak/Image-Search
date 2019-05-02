@@ -1,9 +1,11 @@
 import React from 'react';
 import Home from './Home/Home'
-import Error from './Error'
+import Error from './404/Error'
+import SearchResult from './ResultPage/SearchResult/SearchResult'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 function App() {
+
     return (
 
         <Router>
@@ -13,13 +15,7 @@ function App() {
                         return (<Home/>)
                     }
                 }/>
-                <Route path="/search" exact render={
-                    () => {
-                        return (
-                            <h1>Yükleniyor</h1>
-                        )
-                    }
-                }/>
+                <Route path="/search/photos/:id" exact component={SearchResult}/>
                 <Route component={Error}/>
             </Switch>
         </Router>
