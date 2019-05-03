@@ -16,11 +16,11 @@ class SearchResult extends React.Component {
     state = {
         photos: [],
         query: this.props.match.params.query,
-        collection: ''
+        collection: this.props.match.params.collection
     };
 
     fetchPhoto() {
-        axios.get("https://api.unsplash.com/search/photos?page=1&per_page=20&query=" + this.state.query + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7")
+        axios.get("https://api.unsplash.com/search/photos?page=1&query=" + this.state.query + "&collections=" + this.state.collection + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7")
             .then(images => images.data)
             .then(images => {
                 this.setState({

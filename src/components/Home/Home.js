@@ -1,7 +1,6 @@
 import React from 'react';
 import './Home.css';
 import {Link} from 'react-router-dom'
-import {tsStringKeyword} from "@babel/types";
 
 class Home extends React.Component {
 
@@ -18,11 +17,14 @@ class Home extends React.Component {
         );
     };
 
-    collectionHandle=(e)=>{
+
+
+
+    collectionHandle = (e) => {
         this.setState({
-            collection:e.target.value
+            collection: e.target.value
         })
-    }
+    };
 
     render() {
 
@@ -56,19 +58,26 @@ class Home extends React.Component {
                         <div className={"searchArea"}>
 
                             <input type="text" name="" id="" placeholder="Query" value={this.state.query}
-                                   onChange={this.queryHandler}/> <br/>
-                            <select className={"categorySelect"} onChange={this.collectionHandle} value={this.state.collection}>
+                                   onChange={this.queryHandler}
+                            />
+                            <select className={"categorySelect"} onChange={this.collectionHandle}
+                                    value={this.state.collection}>
                                 <option selected>Collections</option>
-                                <option value="Featured">Featured</option>
-                                <option value="Wallpapers">Wallpapers</option>
-                                <option value="Nature">Nature</option>
-                                <option value="Architecture">Architecture</option>
+                                <option value="3356576">Fashion</option>
+                                <option value="3330448">Nature</option>
+                                <option value="1785728">Travel</option>
+                                <option value="597305">Food and Drink</option>
+                                <option value="2110739">Flowers and Plants</option>
+                                <option value="3403106">Summer</option>
+                                <option value="1368807">Sports</option>
+                                <option value="335992">Wallpaper</option>
+                                <option value="281665">Architecture/Building</option>
                             </select>
 
                         </div>
 
 
-                        <Link to={"/search/photos/"+this.state.query}>
+                        <Link to={"/search/" + this.state.query + "/" + this.state.collection}>
                             <div className="searchButton">SEARCH</div>
                         </Link>
 
