@@ -19,13 +19,13 @@ class SearchHeaderBar extends React.Component {
         this.setState({
             query: e.target.value
         });
-    }
+    };
 
     collectionHandle = (e) => {
         this.setState({
             colllection: e.target.value
         });
-    }
+    };
 
 
     render() {

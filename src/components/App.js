@@ -15,7 +15,7 @@ function App() {
                         return (<Home/>)
                     }
                 }/>
-                <Route path="/search/photos/:id" exact component={SearchResult}/>
+                <Route path="/search/photos/:query" exact component={SearchResult}/>
                 <Route component={Error}/>
             </Switch>
         </Router>
