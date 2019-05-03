@@ -6,6 +6,8 @@ import './SearchResult.css';
 import {Link} from "react-router-dom";
 
 import SearchHeaderBar from "../SearchHeaderBar/SearchHeaderBar";
+import {connect} from "react-redux";
+import {updateSearch} from "../../../actions/searchActions";
 
 class SearchResult extends React.Component {
 
@@ -101,4 +103,12 @@ class SearchResult extends React.Component {
     }
 }
 
-export default SearchResult
+const mapStateToProps = (state, props) => ({
+    search: state.search
+});
+
+const mapDispatchToProps = {
+    onUpdateSearch: updateSearch
+};
+
+export default connect(mapStateToProps,mapDispatchToProps) (SearchResult);

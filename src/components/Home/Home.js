@@ -1,6 +1,8 @@
 import React from 'react';
 import './Home.css';
 import {Link} from 'react-router-dom'
+import {connect} from "react-redux";
+import {updateSearch} from "../../actions/searchActions";
 
 class Home extends React.Component {
 
@@ -17,8 +19,9 @@ class Home extends React.Component {
         );
     };
 
-
-
+    onUpdateSearch = () => {
+        this.props.onUpdateSearch(this.state.query, this.state.collection);
+    };
 
     collectionHandle = (e) => {
         this.setState({
@@ -27,7 +30,6 @@ class Home extends React.Component {
     };
 
     render() {
-
         return (
             <div>
                 <div className="App">
@@ -78,7 +80,7 @@ class Home extends React.Component {
 
 
                         <Link to={"/search/" + this.state.query + "/" + this.state.collection}>
-                            <div className="searchButton">SEARCH</div>
+                            <div onClick={this.onUpdateSearch} className="searchButton">SEARCH</div>
                         </Link>
 
                     </header>
@@ -91,7 +93,15 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const mapStateToProps = (state, props) => ({
+    search: state.search
+});
+
+const mapDispatchToProps = {
+    onUpdateSearch: updateSearch
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 
 
