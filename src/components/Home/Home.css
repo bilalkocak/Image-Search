@@ -31,6 +31,8 @@
 
 .searchArea{
   margin-top: 51px;
+  display: flex;
+  flex-direction: column;
 }
 
 .searchArea input {

@@ -30,6 +30,7 @@
     margin-left: 86px;
     margin-top: 35px;
     margin-bottom: 35px;
+    flex-direction: row;
 }
 
 .headerSearchButton{
