@@ -1,0 +1,80 @@
+.popUpContainer {
+    max-width: 1100px;
+    width: 80%;
+    position: absolute;
+    background-color: #fff;
+    margin: 50px 10% auto 10%;
+    height: auto;
+    padding: 25px;
+}
+
+.PopupProfileAndDownload {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.popUpProfile {
+    display: flex;
+}
+
+.popUpProfilePhoto img {
+    border-radius: 30px;
+    width: 60px;
+    height: 60px;
+}
+
+.popUpProfileInfo {
+    margin-left: 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.popUpProfileInfo a {
+    color: #000;
+    font-weight: bold;
+}
+
+.popUpProfileName {
+    font-size: 30px;
+    line-height: 41px;
+}
+
+.popUpProfileLink {
+    font-size: 20px;
+    line-height: 27px;
+}
+
+.popUpProfileLink a {
+    color: #2A2B8D;
+}
+
+.PopUpDownload a {
+    color: #2A2B8D;
+}
+
+.PopUpDownloadButton {
+    width: 200px;
+    height: 60px;
+    left: 965px;
+    top: 753px;
+    background: #FFFFFF;
+    border: 2px solid #2A2B8D;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 25px;
+    color: #2A2B8D;
+    background-image: url(../../images/download-arrow-1.2.svg);
+    background-position: top 20px left 25px;
+    background-repeat: no-repeat;
+    padding-top: 17px;
+    padding-left: 62px;
+}
+
+.PopUpDownloadButton:hover {
+    cursor: pointer;
+}

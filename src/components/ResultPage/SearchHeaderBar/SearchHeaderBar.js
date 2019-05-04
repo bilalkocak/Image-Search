@@ -2,6 +2,8 @@ import React from 'react';
 
 import './SearchHeaderBar.css';
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {updateSearch} from "../../../actions/searchActions";
 
 class SearchHeaderBar extends React.Component {
 
@@ -12,7 +14,6 @@ class SearchHeaderBar extends React.Component {
     state = {
         query: '',
         collection: "",
-        user:{}
     };
 
     queryHandler = (e) => {
@@ -23,8 +24,12 @@ class SearchHeaderBar extends React.Component {
 
     collectionHandle = (e) => {
         this.setState({
-            colllection: e.target.value
+            collection: e.target.value
         });
+    };
+
+    onUpdateSearch = () => {
+        this.props.onUpdateSearch(this.state.query, this.state.collection);
     };
 
 
@@ -60,16 +65,21 @@ class SearchHeaderBar extends React.Component {
                     <input type="text" name="" id="" placeholder="Query" onChange={this.queryHandler}
                            value={this.state.query}/> <br/>
                     <select className={"categorySelect headerCategorySelect"} onChange={this.collectionHandle}
-                            value={this.state.collection}>
-                        <option selected disabled>Collections</option>
-                        <option value="Featured">Featured</option>
-                        <option value="Wallpapers">Wallpapers</option>
-                        <option value="Nature">Nature</option>
-                        <option value="Architecture">Architecture</option>
+                            value={''}>
+                        <option selected>Collections</option>
+                        <option value="3356576">Fashion</option>
+                        <option value="3330448">Nature</option>
+                        <option value="1785728">Travel</option>
+                        <option value="597305">Food and Drink</option>
+                        <option value="2110739">Flowers and Plants</option>
+                        <option value="3403106">Summer</option>
+                        <option value="1368807">Sports</option>
+                        <option value="335992">Wallpaper</option>
+                        <option value="281665">Architecture/Building</option>
                     </select>
 
-                    <Link to={"/search/photos/" + this.state.query}>
-                        <div className="headerSearchButton">SEARCH</div>
+                    <Link to={"/search/" + this.state.query + "/" + this.state.collection}>
+                        <div onClick={this.onUpdateSearch} className="headerSearchButton">SEARCH</div>
                     </Link>
                 </div>
 
@@ -79,4 +89,11 @@ class SearchHeaderBar extends React.Component {
     }
 }
 
-export default SearchHeaderBar
+const mapStateToProps = (state, props) => ({
+    search: state.search
+});
+
+const mapDispatchToProps = {
+    onUpdateSearch: updateSearch
+};
+export default connect(mapStateToProps, mapDispatchToProps)(SearchHeaderBar);
