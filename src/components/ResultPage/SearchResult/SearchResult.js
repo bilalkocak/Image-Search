@@ -18,7 +18,8 @@ class SearchResult extends React.Component {
     state = {
         photos: [],
         query: this.props.match.params.query,
-        collection: this.props.match.params.collection
+        collection: this.props.match.params.collection,
+        id:this.props.match.params.id
     };
 
     fetchPhoto() {
@@ -31,14 +32,14 @@ class SearchResult extends React.Component {
             })
     }
 
-    photoIdHandler=(id)=>{
-        this.props.photoIdHandler(this.state.query, this.state.collection,id);
+    photoIdHandler = (id) => {
+        this.props.photoIdHandler(this.state.query, this.state.collection, id);
     };
 
     componentDidMount() {
         /*const API_KEY = "10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7";
         const SECRET_KEY = "60664e6c8bee47b51c9128d3538418cee0cb777d892b9d2918857408d4422ee1";*/
-        //this.fetchPhoto()
+        this.fetchPhoto()
     }
 
 
@@ -51,15 +52,17 @@ class SearchResult extends React.Component {
                     <div className="masonry">
                         {this.state.photos.map(image => {
                             return (
-                                <div className={"masonry-item"}  key={image.id}>
-                                    <img src={image.urls.small} className={"masonry-content"} alt=""/>
-                                </div>
+                                <Link to={"/search/query/collection/" + image.id}>
+                                    <div className={"masonry-item"} key={image.id}>
+                                        <img src={image.urls.small} className={"masonry-content"} alt=""/>
+                                    </div>
+                                </Link>
                             )
                         })}
                     </div>
                 </div>
                 {
-                    this.props.match.params.id ? <PopUp/> : <div/>
+                    this.props.match.params.id ? <PopUp id={this.state.id}/> : <div/>
                 }
             </div>
 
