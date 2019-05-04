@@ -45,6 +45,9 @@ class PopUp extends React.Component {
 
                         </div>
                     </div>
+                    <div className="PopUpMaps">
+
+                    </div>
                 </div>
             </div>
         )
@@ -52,4 +55,5 @@ class PopUp extends React.Component {
 
 }
 
-export default PopUp;
+
+export default PopUp
