@@ -2,19 +2,19 @@ import React from 'react';
 
 import './SearchHeaderBar.css';
 import {Link} from "react-router-dom";
-import {connect} from "react-redux";
-import {updateSearch} from "../../../actions/searchActions";
 
 class SearchHeaderBar extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            query: window.location.pathname.split('/')[2],
+            collection: window.location.pathname.split('/')[3]
+
+        };
+
     }
 
-    state = {
-        query: '',
-        collection: "",
-    };
 
     queryHandler = (e) => {
         this.setState({
@@ -28,9 +28,7 @@ class SearchHeaderBar extends React.Component {
         });
     };
 
-    onUpdateSearch = () => {
-        this.props.onUpdateSearch(this.state.query, this.state.collection);
-    };
+
 
 
     render() {
@@ -65,7 +63,7 @@ class SearchHeaderBar extends React.Component {
                     <input type="text" name="" id="" placeholder="Query" onChange={this.queryHandler}
                            value={this.state.query}/> <br/>
                     <select className={"categorySelect headerCategorySelect"} onChange={this.collectionHandle}
-                            value={''}>
+                            value={this.state.collection}>
                         <option selected>Collections</option>
                         <option value="3356576">Fashion</option>
                         <option value="3330448">Nature</option>
@@ -89,11 +87,5 @@ class SearchHeaderBar extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => ({
-    search: state.search
-});
 
-const mapDispatchToProps = {
-    onUpdateSearch: updateSearch
-};
-export default connect(mapStateToProps, mapDispatchToProps)(SearchHeaderBar);
+export default SearchHeaderBar;

@@ -4,8 +4,6 @@ import './SearchResult.css';
 import PopUp from '../../PopUp/PopUp'
 import {Link} from "react-router-dom";
 import SearchHeaderBar from "../SearchHeaderBar/SearchHeaderBar";
-import {connect} from "react-redux";
-import {updateSearch} from "../../../actions/searchActions";
 
 
 class SearchResult extends React.Component {
@@ -14,8 +12,8 @@ class SearchResult extends React.Component {
         super(props);
         this.state = {
             photos: [],
-            query: props.match.params.query,
-            collection: props.match.params.collection,
+            query: window.location.pathname.split('/')[2],
+            collection: window.location.pathname.split('/')[4],
         };
     }
 
@@ -71,12 +69,5 @@ class SearchResult extends React.Component {
     }
 }
 
-const mapStateToProps = (state, props) => ({
-    search: state.search
-});
 
-const mapDispatchToProps = {
-    photoIdHandler: updateSearch
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SearchResult);
+export default SearchResult;
