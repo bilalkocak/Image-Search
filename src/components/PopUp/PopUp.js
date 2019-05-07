@@ -172,7 +172,7 @@ class PopUp extends React.Component {
 
     getInfo() {
         var userID, userName, name, profileLink, profileImage, exifMake, exifModel, exifExposureTime, exifAperture,
-            exifFocalLength, exifIso, views, downloads, likes, width, height, urlRegular, urlDownload;
+            exifFocalLength, exifIso, views, downloads, likes, width, height, locationTitle, urlRegular, urlDownload;
         try {
             userID = this.state.photo.user.id;
             userName = this.state.photo.user.username;
@@ -191,7 +191,8 @@ class PopUp extends React.Component {
             height = this.state.photo.height;
             width = this.state.photo.width;
             urlRegular = this.state.photo.urls.regular;
-            urlDownload = this.state.links.downlad;
+            urlDownload = this.state.photo.links.download;
+            locationTitle = this.state.photo.location.title
         } catch (e) {
             console.log(e)
         }
@@ -213,7 +214,8 @@ class PopUp extends React.Component {
             width,
             height,
             urlRegular,
-            urlDownload
+            urlDownload,
+            description: locationTitle
         }
     }
 
@@ -232,7 +234,7 @@ class PopUp extends React.Component {
     };
 
     render() {
-        const { open, openSecondModal } = this.state;
+        const {open, openSecondModal} = this.state;
         return (
             <div>
                 <Modal open={open} onClose={this.onCloseModal} center>
@@ -241,7 +243,7 @@ class PopUp extends React.Component {
                             <img src={this.getInfo().urlRegular}
                                  alt=""/>
                         </div>
-                        <div className={'PopupProfileAndDownload'}>
+                        <div className={'popupProfileAndButtons'}>
                             <div className="popUpProfile">
                                 <div className="popUpProfilePhoto">
                                     <a href={this.getInfo().profileLink}>
@@ -259,27 +261,111 @@ class PopUp extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="PopUpDownload">
-
+                            <div className="popUpButtons">
+                                <div className="popUpButton moreInfoButton" onClick={this.onOpenSecondModal}>
+                                    MoreInfo
+                                </div>
                                 <a href={this.getInfo().urlDownload}>
-                                    <div className={"PopUpDownloadButton"}>
+                                    <div className={"popUpButton downloadButton"}>
                                         Download
                                     </div>
                                 </a>
 
                             </div>
                         </div>
-                        <button className="btn btn-action" onClick={this.onOpenSecondModal}>
-                            Open second modal
-                        </button>
+
                         <div className="PopUpMaps">
 
                         </div>
                     </div>
                 </Modal>
                 <Modal open={openSecondModal} onClose={this.onCloseSecondModal} center>
+                    <div className="moreInfoHeader">
+                        <div className="moreInfoHeaderTitle">
+                            Info
+                        </div>
+                        <div className="moreInfoHeaderDate">
+                            {this.getInfo().description}
+                        </div>
+                    </div>
+                    <div className="moreInfoStats">
+                        <div className="moreInfoStat">
+                            <div className="moreInfoStatTitle">
+                                Views
+                            </div>
+                            <div className="moreInfoStatCount">
+                                {this.getInfo().views}
+                            </div>
+                        </div>
+                        <div className="moreInfoStat">
+                            <div className="moreInfoStatTitle">
+                                Downloads
+                            </div>
+                            <div className="moreInfoStatCount">
+                                {this.getInfo().downloads}
+                            </div>
+                        </div>
+                        <div className="moreInfoStat">
+                            <div className="moreInfoStatTitle">
+                                Likes
+                            </div>
+                            <div className="moreInfoStatCount">
+                                {this.getInfo().likes}
+                            </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <div className="moreInfoExifContainer">
 
-
+                        <div className="moreInfoExif">
+                            <div className="moreInfoExifTitle">
+                                Camera Make
+                            </div>
+                            <div className="moreInfoExifInfo">
+                                {this.getInfo().exifMake}
+                            </div>
+                        </div>
+                        <div className="moreInfoExif">
+                            <div className="moreInfoExifTitle">
+                                Camera Model
+                            </div>
+                            <div className="moreInfoExifInfo">
+                                {this.getInfo().exifModel}
+                            </div>
+                        </div>
+                        <div className="moreInfoExif">
+                            <div className="moreInfoExifTitle">
+                                Focal Length
+                            </div>
+                            <div className="moreInfoExifInfo">
+                                {this.getInfo().exifFocalLength}mm
+                            </div>
+                        </div>
+                        <div className="moreInfoExif">
+                            <div className="moreInfoExifTitle">
+                                Aperture
+                            </div>
+                            <div className="moreInfoExifInfo">
+                                ƒ/{this.getInfo().exifAperture}
+                            </div>
+                        </div>
+                        <div className="moreInfoExif">
+                            <div className="moreInfoExifTitle">
+                                ISO
+                            </div>
+                            <div className="moreInfoExifInfo">
+                                {this.getInfo().exifIso}
+                            </div>
+                        </div>
+                        <div className="moreInfoExif">
+                            <div className="moreInfoExifTitle">
+                                Dimensions
+                            </div>
+                            <div className="moreInfoExifInfo">
+                                {this.getInfo().width} × {this.getInfo().height}
+                            </div>
+                        </div>
+                    </div>
                 </Modal>
             </div>
         );

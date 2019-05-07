@@ -11,7 +11,7 @@
     z-index: 999999;
 }*/
 
-.PopupProfileAndDownload {
+.popupProfileAndButtons {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
@@ -30,6 +30,7 @@
 
 .popUpProfileInfo {
     margin-left: 23px;
+    height: 60px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -54,16 +55,20 @@
     color: #2A2B8D;
 }
 
-.PopUpDownload a {
+.popUpButtons {
+    display: flex;
+    flex-direction: row;
+}
+
+.popUpButtons a {
     color: #2A2B8D;
 }
 
-.PopUpDownloadButton {
-    width: 200px;
+.popUpButton {
+    width: 180px;
     height: 60px;
     left: 965px;
     top: 753px;
-    background: #FFFFFF;
     border: 2px solid #2A2B8D;
     box-sizing: border-box;
     border-radius: 10px;
@@ -71,13 +76,82 @@
     font-size: 18px;
     line-height: 25px;
     color: #2A2B8D;
-    background-image: url(../../images/download-arrow-1.2.svg);
-    background-position: top 20px left 25px;
-    background-repeat: no-repeat;
     padding-top: 17px;
+
+}
+
+.downloadButton {
+    background: #FFFFFF url(../../images/download-arrow-1.2.svg) no-repeat top 20px left 25px;
     padding-left: 62px;
 }
 
-.PopUpDownloadButton:hover {
+.moreInfoButton {
+    text-align: center;
+    margin-right: 20px;
+}
+
+.popUpButton:hover {
     cursor: pointer;
+}
+
+
+/* MORE INFO */
+
+.moreInfoHeader {
+    width: 500px;
+    height: 65px;
+}
+
+.moreInfoHeaderTitle {
+    font-weight: 400;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 21px;
+}
+
+.moreInfoHeaderDate{
+    font-size: 12px;
+}
+
+
+.moreInfoStats{
+    margin-top: 16px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.moreInfoStat{
+    width: 165px;
+}
+
+.moreInfoStatTitle{
+    height: 19px;
+    margin-bottom: 10px;
+}
+
+.moreInfoStatCount{
+    font-weight: 400;
+    font-size: 21px;
+}
+
+.moreInfoExifContainer{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.moreInfoExif{
+    width: 181px;
+    margin: 16px;
+}
+.moreInfoExifTitle{
+    font-size: 12px;
+    color: #999;
+}
+.moreInfoExifInfo{
+
 }
