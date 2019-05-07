@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios/index';
-import Popup from 'reactjs-popup'
 import './SearchResult.css';
 import PopUp from '../../PopUp/PopUp'
 import {Link} from "react-router-dom";
@@ -13,14 +12,14 @@ class SearchResult extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            photos: [],
+            query: props.match.params.query,
+            collection: props.match.params.collection,
+        };
     }
 
-    state = {
-        photos: [],
-        query: this.props.match.params.query,
-        collection: this.props.match.params.collection,
-        id:this.props.match.params.id
-    };
+
 
     fetchPhoto() {
         axios.get("https://api.unsplash.com/search/photos?page=1&query=" + this.state.query + "&collections=" + this.state.collection + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7")
@@ -43,6 +42,7 @@ class SearchResult extends React.Component {
     }
 
 
+
     render() {
 
         return (
@@ -52,8 +52,8 @@ class SearchResult extends React.Component {
                     <div className="masonry">
                         {this.state.photos.map(image => {
                             return (
-                                <Link to={"/search/query/collection/" + image.id}>
-                                    <div className={"masonry-item"} key={image.id}>
+                                <Link to={"/search/"+this.state.query+"/"+this.state.collection+"/" + image.id}>
+                                    <div onClick={this.fetchInfo} className={"masonry-item"} key={image.id}>
                                         <img src={image.urls.small} className={"masonry-content"} alt=""/>
                                     </div>
                                 </Link>
@@ -62,7 +62,7 @@ class SearchResult extends React.Component {
                     </div>
                 </div>
                 {
-                    this.props.match.params.id ? <PopUp id={this.state.id}/> : <div/>
+                    this.props.match.params.id && (<PopUp/>)
                 }
             </div>
 

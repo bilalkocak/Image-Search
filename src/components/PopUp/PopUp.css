@@ -1,4 +1,4 @@
-.popUpContainer {
+/*.popUpContainer {
     max-width: 1100px;
     width: 80%;
     position: absolute;
@@ -6,7 +6,10 @@
     margin: 50px 10% auto 10%;
     height: auto;
     padding: 25px;
-}
+    position: absolute;
+    top: 50px;
+    z-index: 999999;
+}*/
 
 .PopupProfileAndDownload {
     margin-top: 30px;
