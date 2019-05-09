@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 
 class SearchHeaderBar extends React.Component {
 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -20,6 +21,7 @@ class SearchHeaderBar extends React.Component {
         this.setState({
             query: e.target.value
         });
+
     };
 
     collectionHandle = (e) => {
@@ -77,7 +79,7 @@ class SearchHeaderBar extends React.Component {
                     </select>
 
                     <Link to={"/search/" + this.state.query + "/" + this.state.collection}>
-                        <div onClick={this.onUpdateSearch} className="headerSearchButton">SEARCH</div>
+                        <div onClick={this.props.queryHandler} className="headerSearchButton">SEARCH</div>
                     </Link>
                 </div>
 
