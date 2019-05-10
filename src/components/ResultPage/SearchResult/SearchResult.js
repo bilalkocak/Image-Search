@@ -4,6 +4,7 @@ import './SearchResult.css';
 import PopUp from '../../PopUp/PopUp'
 import {Link} from "react-router-dom";
 import SearchHeaderBar from "../SearchHeaderBar/SearchHeaderBar";
+import NoResult from '../../NoResult/NoResult'
 
 
 class SearchResult extends React.Component {
@@ -62,20 +63,26 @@ class SearchResult extends React.Component {
         return (
             <div>
                 <SearchHeaderBar queryHandler={this.queryHandler}/>
-                <div className="masonry-wrapper">
-                    <div className="masonry">
-                        {this.state.photos.map(image => {
-                            return (
-                                <Link to={"/search/" + this.state.query + "/" + this.state.collection + "/" + image.id}
-                                      key={image.id}>
-                                    <div onClick={this.setPopUp} className={"masonry-item"}>
-                                        <img src={image.urls.small} className={"masonry-content"} alt=""/>
-                                    </div>
-                                </Link>
-                            )
-                        })}
-                    </div>
-                </div>
+                {
+                    this.state.photos.length === 0 ? <NoResult/> : (
+                        <div className="masonry-wrapper">
+                            <div className="masonry">
+                                {this.state.photos.map(image => {
+                                    return (
+                                        <Link
+                                            to={"/search/" + this.state.query + "/" + this.state.collection + "/" + image.id}
+                                            key={image.id}>
+                                            <div onClick={this.setPopUp} className={"masonry-item"}>
+                                                <img src={image.urls.small} className={"masonry-content"} alt=""/>
+                                            </div>
+                                        </Link>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    )
+                }
+                
                 {
                     this.props.match.params.id && (<PopUp setPopUp={this.setPopUp} isOpen={this.state.popUp}/>)
                 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import './PopUp.css';
 import axios from "axios";
+import {Redirect} from 'react-router-dom'
 
 
 import Modal from 'react-responsive-modal';
@@ -128,48 +129,54 @@ class PopUp extends React.Component {
         const open = this.props.isOpen
         return (
             <div>
-                <Modal open={open} onClose={this.onCloseModal} center>
-                    <div>
-                        <div>
-                            <img src={this.getInfo().urlRegular}
-                                 alt=""/>
-                        </div>
-                        <div className={'popupProfileAndButtons'}>
-                            <div className="popUpProfile">
-                                <div className="popUpProfilePhoto">
-                                    <a href={this.getInfo().profileLink}>
-                                        <img
-                                            src={this.getInfo().profileImage}
-                                            alt=""/>
-                                    </a>
+                {
+                    this.state.photo==={}?(
+                        <Modal open={open} onClose={this.onCloseModal} center>
+                            <div>
+                                <div>
+                                    <img src={this.getInfo().urlRegular}
+                                         alt=""/>
                                 </div>
-                                <div className="popUpProfileInfo">
-                                    <div className="popUpProfileName">
-                                        <a href={this.getInfo().profileLink}>{this.getInfo().name}</a>
+                                <div className={'popupProfileAndButtons'}>
+                                    <div className="popUpProfile">
+                                        <div className="popUpProfilePhoto">
+                                            <a href={this.getInfo().profileLink}>
+                                                <img
+                                                    src={this.getInfo().profileImage}
+                                                    alt=""/>
+                                            </a>
+                                        </div>
+                                        <div className="popUpProfileInfo">
+                                            <div className="popUpProfileName">
+                                                <a href={this.getInfo().profileLink}>{this.getInfo().name}</a>
+                                            </div>
+                                            <div className="popUpProfileLink">
+                                                <a href={this.getInfo().profileLink}>@{this.getInfo().userName}</a>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="popUpProfileLink">
-                                        <a href={this.getInfo().profileLink}>@{this.getInfo().userName}</a>
+                                    <div className="popUpButtons">
+                                        <div className="popUpButton moreInfoButton" onClick={this.onOpenSecondModal}>
+                                            MoreInfo
+                                        </div>
+                                        <a href={this.getInfo().urlDownload}>
+                                            <div className={"popUpButton downloadButton"}>
+                                                Download
+                                            </div>
+                                        </a>
+
                                     </div>
+                                </div>
+
+                                <div className="PopUpMaps">
+
                                 </div>
                             </div>
-                            <div className="popUpButtons">
-                                <div className="popUpButton moreInfoButton" onClick={this.onOpenSecondModal}>
-                                    MoreInfo
-                                </div>
-                                <a href={this.getInfo().urlDownload}>
-                                    <div className={"popUpButton downloadButton"}>
-                                        Download
-                                    </div>
-                                </a>
+                        </Modal>
+                        ): <Redirect to={"/search/oops/screen"}/>
 
-                            </div>
-                        </div>
+            }
 
-                        <div className="PopUpMaps">
-
-                        </div>
-                    </div>
-                </Modal>
                 <Modal open={openSecondModal} onClose={this.onCloseSecondModal} center>
                     <div className="moreInfoHeader">
                         <div className="moreInfoHeaderTitle">
