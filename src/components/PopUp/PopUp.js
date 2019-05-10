@@ -257,7 +257,7 @@ class PopUp extends React.Component {
                                 Focal Length
                             </div>
                             <div className="moreInfoExifInfo">
-                                {this.getInfo().exifFocalLength === null ? ("No Info") : this.getInfo().exifFocalLength}mm
+                                {this.getInfo().exifFocalLength === null ? ("No Info") : this.getInfo().exifFocalLength + "mm"}
                             </div>
                         </div>
                         <div className="moreInfoExif">
