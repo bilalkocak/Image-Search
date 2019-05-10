@@ -9,9 +9,8 @@ const NoResult = () =>
                 <div className="noResultOops">
                     <h1>Oops!</h1>
                 </div>
-                <h2>404 - Page not found</h2>
-                <p>The page you are looking for might have been removed had its name changed or is
-                    temporarily unavailable.</p>
+                <h2>We tried but we couldn't.</h2>
+                <p>The keyword you were looking for could not be found in the collection you selected. You can redial your preferences by changing them.</p>
 
             </div>
         </div>
