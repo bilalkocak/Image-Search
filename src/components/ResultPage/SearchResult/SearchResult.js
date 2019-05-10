@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 import SearchHeaderBar from "../SearchHeaderBar/SearchHeaderBar";
 import NoResult from '../../NoResult/NoResult'
 import {SyncLoader} from "react-spinners";
-import ReactPaginate from 'react-paginate';
 
 
 class SearchResult extends React.Component {
@@ -46,7 +45,7 @@ class SearchResult extends React.Component {
                     photos: images.results,
                     isLoading: false,
                     photoCount: images.total,
-                    pageCount: images.total / 15
+                    pageCount: images.total_pages
                 });
                 console.log("fetch photo")
             })
@@ -68,7 +67,7 @@ class SearchResult extends React.Component {
         }, 500);
     };
 
-    clikNext = () => {
+    clickNext = () => {
         this.setState({
             currentPage: this.state.currentPage + 1
         }, () =>
@@ -87,55 +86,69 @@ class SearchResult extends React.Component {
         return (
             <div>
                 <SearchHeaderBar queryHandler={this.queryHandler}/>
+                <div className={"resultWrapper"}>
+                    {
+                        this.state.isLoading ?
+                            <div className="searchLoadArea">
+                                <div className="searchLoadArea2">
+                                    <SyncLoader
+                                        size={30}
+                                        color={'#2A2B8D;'}
+                                    />
+                                </div>
 
-                {
-                    this.state.isLoading ?
-                        <div className="searchLoadArea">
-                            <div className="searchLoadArea2">
-                                <SyncLoader
-                                    size={30}
-                                    color={'#2A2B8D;'}
-                                />
                             </div>
-
-                        </div>
-                        :
-                        this.state.photos.length === 0 ? <NoResult/> : (
-                            <div>
-                                <div className="masonry-wrapper">
-                                    <div className="masonry">
-                                        {this.state.photos.map(image => {
-                                            return (
-                                                <Link
-                                                    to={"/search/" + this.state.query + "/" + this.state.collection + "/" + image.id}
-                                                    key={image.id}>
-                                                    <div onClick={this.setPopUp} className={"masonry-item"}>
-                                                        <img src={image.urls.small} className={"masonry-content"}
-                                                             alt=""/>
-                                                    </div>
-                                                </Link>
-                                            )
-                                        })}
+                            :
+                            this.state.photos.length === 0 ? <NoResult/> : (
+                                <div>
+                                    <div className="masonry-wrapper">
+                                        <div className="masonry">
+                                            {this.state.photos.map(image => {
+                                                return (
+                                                    <Link
+                                                        to={"/search/" + this.state.query + "/" + this.state.collection + "/" + image.id}
+                                                        key={image.id}>
+                                                        <div onClick={this.setPopUp} className={"masonry-item"}>
+                                                            <img src={image.urls.small} className={"masonry-content"}
+                                                                 alt=""/>
+                                                        </div>
+                                                    </Link>
+                                                )
+                                            })}
+                                        </div>
                                     </div>
-                                </div>
-                                <div className="paginate">
-                                    <ul>
-                                        <li onClick={this.clickPrev}>
-                                            Previous
-                                        </li>
-                                        <li onClick={this.clikNext}>
-                                            Next
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                                    {
+                                        this.state.pageCount !== 1 ?
+                                            (
+                                                <div className="paginate">
+                                                    <ul>
+                                                        {
+                                                            this.state.currentPage !== 1 ? <li onClick={this.clickPrev}>
+                                                                Previous
+                                                            </li> : null
+                                                        }
+                                                        {
+                                                            this.state.currentPage !== this.state.pageCount ?
+                                                                <li onClick={this.clickNext}>
+                                                                    Next
+                                                                </li> : null
+                                                        }
 
-                        )
-                }
+                                                    </ul>
+                                                </div>
+                                            ) : null
+                                    }
 
-                {
-                    this.props.match.params.id && (<PopUp setPopUp={this.setPopUp} isOpen={this.state.popUp}/>)
-                }
+                                </div>
+
+                            )
+                    }
+
+                    {
+                        this.props.match.params.id && (<PopUp setPopUp={this.setPopUp} isOpen={this.state.popUp}/>)
+                    }
+                </div>
+
             </div>
 
 
