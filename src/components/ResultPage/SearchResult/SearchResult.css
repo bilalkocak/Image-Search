@@ -12,6 +12,10 @@ body {
     background: #E5E5E5;
 }
 
+.resultWrapper{
+    margin-top: 150px;
+}
+
 .wrapper {
     max-width: 1280px;
     margin-right: auto;
