@@ -39,14 +39,14 @@ class SearchResult extends React.Component {
 
 
     fetchPhoto() {
-        axios.get("https://api.unsplash.com/search/photos?page=" + this.state.currentPage + "&per_page=10&query=" + this.state.query + "&collections=" + this.state.collection + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7")
+        axios.get("https://api.unsplash.com/search/photos?page=" + this.state.currentPage + "&per_page=15&query=" + this.state.query + "&collections=" + this.state.collection + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7")
             .then(images => images.data)
             .then(images => {
                 this.setState({
                     photos: images.results,
                     isLoading: false,
                     photoCount: images.total,
-                    pageCount: images.total / 10
+                    pageCount: images.total / 15
                 });
                 console.log("fetch photo")
             })
