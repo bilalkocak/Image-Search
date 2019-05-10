@@ -68,8 +68,9 @@ class SearchHeaderBar extends React.Component {
                            value={this.state.query}/> <br/>
                     <select className={"categorySelect headerCategorySelect"}
                             onChange={this.collectionHandle}
-                            value={this.state.collection}>
-                        <option selected>Collections</option>
+                            defaultValue={this.state.collection?this.state.collection:"default"}
+                            >
+                        <option value={"default"}>Collections</option>
                         <option value="3356576">Fashion</option>
                         <option value="3330448">Nature</option>
                         <option value="1785728">Travel</option>

@@ -6,6 +6,7 @@ import {Redirect} from 'react-router-dom'
 
 import Modal from 'react-responsive-modal';
 
+
 class PopUp extends React.Component {
     constructor(props) {
         super(props);
@@ -13,18 +14,27 @@ class PopUp extends React.Component {
             photo: {},
             photoId: window.location.pathname.split('/')[4],
             openSecondModal: false,
+            isItPhoto: true
         };
+
 
     }
 
 
     componentWillReceiveProps(nextProps, nextContext) {
-        console.log(nextProps.isOpen,"xxx")
-        if (nextProps.isOpen){
+        console.log(nextProps.isOpen, "xxx")
+        if (nextProps.isOpen) {
             this.setState({
-                photoId:window.location.pathname.split('/')[4]
-            },()=>this.fetchInfo())
-        }else{
+                photoId: window.location.pathname.split('/')[4]
+            }, () => {
+                setTimeout(() => {
+                    if (Object.keys(this.state.photo).length === 0) this.setState({
+                        isItPhoto: false
+                    })
+                }, 3000)
+                this.fetchInfo()
+            })
+        } else {
             this.setState({
                 photo: {}
             })
@@ -32,6 +42,7 @@ class PopUp extends React.Component {
 
 
     }
+
 
     onOpenSecondModal = () => {
         this.setState({openSecondModal: true});
@@ -51,7 +62,7 @@ class PopUp extends React.Component {
                         photo: images
                     });
                     console.log("fetchInfo xxx")
-                    console.log("xxx",this.state.photo)
+                    console.log("xxx", this.state.photo)
                 } catch (e) {
                     console.log(e)
                 }
@@ -92,7 +103,7 @@ class PopUp extends React.Component {
             urlDownload = this.state.photo.links.download;
             locationTitle = this.state.photo.location.title
         } catch (e) {
-            console.log(e)
+
         }
         return {
             userID,
@@ -123,14 +134,13 @@ class PopUp extends React.Component {
         //this.setState({open: false});
     };
 
-
     render() {
         const {openSecondModal} = this.state;
-        const open = this.props.isOpen
+        const open = this.props.isOpen;
         return (
             <div>
                 {
-                    this.state.photo==={}?(
+                    this.state.isItPhoto ? (
                         <Modal open={open} onClose={this.onCloseModal} center>
                             <div>
                                 <div>
@@ -173,9 +183,9 @@ class PopUp extends React.Component {
                                 </div>
                             </div>
                         </Modal>
-                        ): <Redirect to={"/search/oops/screen"}/>
+                    ) : <Redirect to={"/search/noresult/screen"}/>
 
-            }
+                }
 
                 <Modal open={openSecondModal} onClose={this.onCloseSecondModal} center>
                     <div className="moreInfoHeader">
