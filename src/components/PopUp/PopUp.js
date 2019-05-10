@@ -123,7 +123,7 @@ class PopUp extends React.Component {
             height,
             urlRegular,
             urlDownload,
-            description: locationTitle,
+            location: locationTitle,
             latitude,
             longitude
         }
@@ -133,6 +133,11 @@ class PopUp extends React.Component {
     onCloseModal = () => {
         this.props.setPopUp()
         //this.setState({open: false});
+    };
+
+    onMapClicked = (props) => {
+
+        window.open('https://www.google.com.tr/maps/@' + this.getInfo().latitude + ',' + this.getInfo().longitude + ',15z', '_blank');
     };
 
     render() {
@@ -205,28 +210,32 @@ class PopUp extends React.Component {
                             Info
                         </div>
                         <div className="moreInfoHeaderDate">
-                            {this.getInfo().description}
+                            {this.getInfo().location ? this.getInfo().location : "No location info"}
                         </div>
                     </div>
-                    <div className="PopUpMaps">
-                        <Map google={this.props.google}
-                             style={{width: '760px', height: '400px', position: 'relative'}}
-                             className={'map'}
-                             zoom={14}
-                             initialCenter={{
-                                 lat: this.getInfo().latitude,
-                                 lng: this.getInfo().longitude
-                             }}>
+                    {
+                        this.getInfo().longitude ? (<div className="PopUpMaps">
+                            <Map google={this.props.google}
+                                 style={{width: '760px', height: '400px', position: 'relative'}}
+                                 className={'map'}
+                                 zoom={14}
+                                 initialCenter={{
+                                     lat: this.getInfo().latitude,
+                                     lng: this.getInfo().longitude
+                                 }}
+                                 onClick={this.onMapClicked}>
 
-                            <Marker
-                                title={'The marker`s title will appear as a tooltip.'}
-                                name={'SOMA'}
-                                position={{lat: this.getInfo().latitude, lng: this.getInfo().longitude}}
+                                <Marker
+                                    title={'The marker`s title will appear as a tooltip.'}
+                                    name={'SOMA'}
+                                    position={{lat: this.getInfo().latitude, lng: this.getInfo().longitude}}
                                 />
 
 
-                        </Map>
-                    </div>
+                            </Map>
+                        </div>) : null
+                    }
+
                     <div className="moreInfoStats">
                         <div className="moreInfoStat">
                             <div className="moreInfoStatTitle">
@@ -311,8 +320,11 @@ class PopUp extends React.Component {
     }
 }
 
+const LoadingContainer = (props) => (
+    <div/>
+)
 export default GoogleApiWrapper({
     apiKey: ("AIzaSyCed7s9WS251M1m2ecIuibVWZ3kqaZ9vvU"),
-    LoadingContainer: null
+    LoadingContainer: LoadingContainer
 })(PopUp)
 
