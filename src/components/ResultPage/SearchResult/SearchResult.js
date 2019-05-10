@@ -6,6 +6,7 @@ import {Link} from "react-router-dom";
 import SearchHeaderBar from "../SearchHeaderBar/SearchHeaderBar";
 import NoResult from '../../NoResult/NoResult'
 import {SyncLoader} from "react-spinners";
+import ReactPaginate from 'react-paginate';
 
 
 class SearchResult extends React.Component {
@@ -17,7 +18,10 @@ class SearchResult extends React.Component {
             query: window.location.pathname.split('/')[2],
             collection: window.location.pathname.split('/')[3],
             popUp: window.location.pathname.split('/')[4] ? true : false,
-            isLoading: true
+            isLoading: true,
+            photoCount: '',
+            pageCount: '',
+            currentPage: 1
         };
 
 
@@ -35,12 +39,14 @@ class SearchResult extends React.Component {
 
 
     fetchPhoto() {
-        axios.get("https://api.unsplash.com/search/photos?page=1&per_page=10&query=" + this.state.query + "&collections=" + this.state.collection + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7")
+        axios.get("https://api.unsplash.com/search/photos?page=" + this.state.currentPage + "&per_page=10&query=" + this.state.query + "&collections=" + this.state.collection + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7")
             .then(images => images.data)
             .then(images => {
                 this.setState({
                     photos: images.results,
-                    isLoading:false
+                    isLoading: false,
+                    photoCount: images.total,
+                    pageCount: images.total / 10
                 });
                 console.log("fetch photo")
             })
@@ -57,11 +63,24 @@ class SearchResult extends React.Component {
             this.setState({
                 query: window.location.pathname.split('/')[2],
                 collection: window.location.pathname.split('/')[3],
-                isLoading:true
+                isLoading: true
             }, () => this.fetchPhoto())
         }, 500);
     };
 
+    clikNext = () => {
+        this.setState({
+            currentPage: this.state.currentPage + 1
+        }, () =>
+            this.fetchPhoto())
+    };
+
+    clickPrev = () => {
+        this.setState({
+            currentPage: this.state.currentPage - 1
+        }, () =>
+            this.fetchPhoto())
+    };
 
     render() {
 
@@ -79,25 +98,40 @@ class SearchResult extends React.Component {
                                 />
                             </div>
 
-                        </div> : this.state.photos.length === 0 ? <NoResult/> : (
-                            <div className="masonry-wrapper">
-                                <div className="masonry">
-                                    {this.state.photos.map(image => {
-                                        return (
-                                            <Link
-                                                to={"/search/" + this.state.query + "/" + this.state.collection + "/" + image.id}
-                                                key={image.id}>
-                                                <div onClick={this.setPopUp} className={"masonry-item"}>
-                                                    <img src={image.urls.small} className={"masonry-content"} alt=""/>
-                                                </div>
-                                            </Link>
-                                        )
-                                    })}
+                        </div>
+                        :
+                        this.state.photos.length === 0 ? <NoResult/> : (
+                            <div>
+                                <div className="masonry-wrapper">
+                                    <div className="masonry">
+                                        {this.state.photos.map(image => {
+                                            return (
+                                                <Link
+                                                    to={"/search/" + this.state.query + "/" + this.state.collection + "/" + image.id}
+                                                    key={image.id}>
+                                                    <div onClick={this.setPopUp} className={"masonry-item"}>
+                                                        <img src={image.urls.small} className={"masonry-content"}
+                                                             alt=""/>
+                                                    </div>
+                                                </Link>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+                                <div className="paginate">
+                                    <ul>
+                                        <li onClick={this.clickPrev}>
+                                            Previous
+                                        </li>
+                                        <li onClick={this.clikNext}>
+                                            Next
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
+
                         )
                 }
-
 
                 {
                     this.props.match.params.id && (<PopUp setPopUp={this.setPopUp} isOpen={this.state.popUp}/>)
