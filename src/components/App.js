@@ -23,11 +23,6 @@ class App extends React.Component{
                     <Route path="/search/:query/:collection" exact component={SearchResult}/>
                     <Route render={
                         () => {
-                            return (<Home/>)
-                        }
-                    }/>
-                    <Route render={
-                        () => {
                             return (<Error/>)
                         }
                     }/>

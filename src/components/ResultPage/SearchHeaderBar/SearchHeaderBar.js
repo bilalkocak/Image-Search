@@ -10,9 +10,9 @@ class SearchHeaderBar extends React.Component {
         super(props);
         this.state = {
             query: window.location.pathname.split('/')[2],
-            collection: window.location.pathname.split('/')[3]
-
+            collection: window.location.pathname.split('/')[3],
         };
+
 
     }
 
@@ -32,8 +32,8 @@ class SearchHeaderBar extends React.Component {
 
 
 
-
     render() {
+
         return (
             <div className={"header"}>
                 <Link to="/">
@@ -62,9 +62,12 @@ class SearchHeaderBar extends React.Component {
 
 
                 <div className="searchArea headerSearchArea">
-                    <input type="text" name="" id="" placeholder="Query" onChange={this.queryHandler}
+                    <input type="text"
+                           placeholder="Query"
+                           onChange={this.queryHandler}
                            value={this.state.query}/> <br/>
-                    <select className={"categorySelect headerCategorySelect"} onChange={this.collectionHandle}
+                    <select className={"categorySelect headerCategorySelect"}
+                            onChange={this.collectionHandle}
                             value={this.state.collection}>
                         <option selected>Collections</option>
                         <option value="3356576">Fashion</option>
@@ -79,11 +82,11 @@ class SearchHeaderBar extends React.Component {
                     </select>
 
                     <Link to={"/search/" + this.state.query + "/" + this.state.collection}>
-                        <div onClick={this.props.queryHandler} className="headerSearchButton">SEARCH</div>
+                        <div onClick={this.props.queryHandler}
+                             className="headerSearchButton">SEARCH
+                        </div>
                     </Link>
                 </div>
-
-
             </div>
         )
     }
