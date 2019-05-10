@@ -167,7 +167,7 @@ class PopUp extends React.Component {
                                     <div className={'popupProfileAndButtons'}>
                                         <div className="popUpProfile">
                                             <div className="popUpProfilePhoto">
-                                                <a href={this.getInfo().profileLink}>
+                                                <a target={'_blank'} href={this.getInfo().profileLink}>
                                                     <img
                                                         src={this.getInfo().profileImage}
                                                         alt=""/>
@@ -175,10 +175,10 @@ class PopUp extends React.Component {
                                             </div>
                                             <div className="popUpProfileInfo">
                                                 <div className="popUpProfileName">
-                                                    <a href={this.getInfo().profileLink}>{this.getInfo().name}</a>
+                                                    <a target={'_blank'} href={this.getInfo().profileLink}>{this.getInfo().name}</a>
                                                 </div>
                                                 <div className="popUpProfileLink">
-                                                    <a href={this.getInfo().profileLink}>@{this.getInfo().userName}</a>
+                                                    <a target={'_blank'} href={this.getInfo().profileLink}>@{this.getInfo().userName}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,7 +187,7 @@ class PopUp extends React.Component {
                                                  onClick={this.onOpenSecondModal}>
                                                 MoreInfo
                                             </div>
-                                            <a href={this.getInfo().urlDownload}>
+                                            <a target={'_blank'} href={this.getInfo().urlDownload}>
                                                 <div className={"popUpButton downloadButton"}>
                                                     Download
                                                 </div>
