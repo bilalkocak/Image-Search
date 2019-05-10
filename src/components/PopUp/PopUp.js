@@ -11,9 +11,25 @@ class PopUp extends React.Component {
         this.state = {
             photo: {},
             photoId: window.location.pathname.split('/')[4],
-            open: true,
             openSecondModal: false,
         };
+
+    }
+
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        console.log(nextProps.isOpen,"xxx")
+        if (nextProps.isOpen){
+            this.setState({
+                photoId:window.location.pathname.split('/')[4]
+            },()=>this.fetchInfo())
+        }else{
+            this.setState({
+                photo: {}
+            })
+        }
+
+
     }
 
     onOpenSecondModal = () => {
@@ -33,11 +49,23 @@ class PopUp extends React.Component {
                     this.setState({
                         photo: images
                     });
+                    console.log("fetchInfo xxx")
+                    console.log("xxx",this.state.photo)
                 } catch (e) {
                     console.log(e)
                 }
             })
     }
+
+    setPopUp = () => {
+        this.setState({
+            popUp: !this.state.popUp
+        }, () => {
+            if (this.state.popUp) {
+                this.fetchPhoto()
+            }
+        })
+    };
 
     getInfo() {
         var userID, userName, name, profileLink, profileImage, exifMake, exifModel, exifExposureTime, exifAperture,
@@ -88,35 +116,16 @@ class PopUp extends React.Component {
         }
     }
 
-    componentDidMount() {
-
-        this.fetchInfo()
-
-    }
-
-    onOpenModal = () => {
-        this.setState({open: true});
-    };
 
     onCloseModal = () => {
-        this.setState({open: false});
-    };
-    download(url) {
-        // fake server request, getting the file url as response
-        setTimeout(() => {
-            const response = {
-                file: url,
-            };
-            // server sent the url to the file!
-            // now, let's download:
-            window.open(response.file);
-            // you could also do:
-            // window.location.href = response.file;
-        }, 100);
+        this.props.setPopUp()
+        //this.setState({open: false});
     };
 
+
     render() {
-        const {open, openSecondModal} = this.state;
+        const {openSecondModal} = this.state;
+        const open = this.props.isOpen
         return (
             <div>
                 <Modal open={open} onClose={this.onCloseModal} center>
@@ -147,7 +156,7 @@ class PopUp extends React.Component {
                                 <div className="popUpButton moreInfoButton" onClick={this.onOpenSecondModal}>
                                     MoreInfo
                                 </div>
-                                <a href={this.getInfo().urlDownload} download target="_blank">
+                                <a href={this.getInfo().urlDownload}>
                                     <div className={"popUpButton downloadButton"}>
                                         Download
                                     </div>
