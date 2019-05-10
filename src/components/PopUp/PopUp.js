@@ -1,11 +1,11 @@
 import React from 'react';
 import './PopUp.css';
 import axios from "axios";
-import {Redirect} from 'react-router-dom'
 
 
 import Modal from 'react-responsive-modal';
 import {SyncLoader} from "react-spinners";
+import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 
 
 class PopUp extends React.Component {
@@ -77,7 +77,8 @@ class PopUp extends React.Component {
 
     getInfo() {
         var userID, userName, name, profileLink, profileImage, exifMake, exifModel, exifExposureTime, exifAperture,
-            exifFocalLength, exifIso, views, downloads, likes, width, height, locationTitle, urlRegular, urlDownload;
+            exifFocalLength, exifIso, views, downloads, likes, width, height, locationTitle, urlRegular, urlDownload,
+            latitude, longitude;
         try {
             userID = this.state.photo.user.id;
             userName = this.state.photo.user.username;
@@ -97,7 +98,9 @@ class PopUp extends React.Component {
             width = this.state.photo.width;
             urlRegular = this.state.photo.urls.regular;
             urlDownload = this.state.photo.links.download;
-            locationTitle = this.state.photo.location.title
+            locationTitle = this.state.photo.location.title;
+            latitude = this.state.photo.location.position.latitude;
+            longitude = this.state.photo.location.position.longitude;
         } catch (e) {
 
         }
@@ -120,7 +123,9 @@ class PopUp extends React.Component {
             height,
             urlRegular,
             urlDownload,
-            description: locationTitle
+            description: locationTitle,
+            latitude,
+            longitude
         }
     }
 
@@ -185,10 +190,6 @@ class PopUp extends React.Component {
 
                                         </div>
                                     </div>
-
-                                    <div className="PopUpMaps">
-
-                                    </div>
                                 </div>
                         }
 
@@ -206,6 +207,25 @@ class PopUp extends React.Component {
                         <div className="moreInfoHeaderDate">
                             {this.getInfo().description}
                         </div>
+                    </div>
+                    <div className="PopUpMaps">
+                        <Map google={this.props.google}
+                             style={{width: '760px', height: '400px', position: 'relative'}}
+                             className={'map'}
+                             zoom={14}
+                             initialCenter={{
+                                 lat: this.getInfo().latitude,
+                                 lng: this.getInfo().longitude
+                             }}>
+
+                            <Marker
+                                title={'The marker`s title will appear as a tooltip.'}
+                                name={'SOMA'}
+                                position={{lat: this.getInfo().latitude, lng: this.getInfo().longitude}}
+                                />
+
+
+                        </Map>
                     </div>
                     <div className="moreInfoStats">
                         <div className="moreInfoStat">
@@ -291,4 +311,8 @@ class PopUp extends React.Component {
     }
 }
 
-export default PopUp
+export default GoogleApiWrapper({
+    apiKey: ("AIzaSyCed7s9WS251M1m2ecIuibVWZ3kqaZ9vvU"),
+    LoadingContainer: null
+})(PopUp)
+
