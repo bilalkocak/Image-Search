@@ -48,12 +48,6 @@ body{
 .masonry-item:hover {
     filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, .3));
 }
-
-
-
-
-
-
 .modal {
     font-size: 12px;
 }
@@ -86,4 +80,13 @@ body{
     background: #ffffff;
     border-radius: 18px;
     border: 1px solid #cfcece;
+}
+/* Loading */
+.searchLoadArea{
+    width: 100%;
+    height: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
