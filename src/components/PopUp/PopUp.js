@@ -230,7 +230,7 @@ class PopUp extends React.Component {
                                 Camera Make
                             </div>
                             <div className="moreInfoExifInfo">
-                                {this.getInfo().exifMake}
+                                {this.getInfo().exifMake === null ? ("No Info") : this.getInfo().exifMake}
                             </div>
                         </div>
                         <div className="moreInfoExif">
@@ -238,7 +238,7 @@ class PopUp extends React.Component {
                                 Camera Model
                             </div>
                             <div className="moreInfoExifInfo">
-                                {this.getInfo().exifModel}
+                                {this.getInfo().exifModel === null ? ("No Info") : this.getInfo().exifModel}
                             </div>
                         </div>
                         <div className="moreInfoExif">
@@ -246,7 +246,7 @@ class PopUp extends React.Component {
                                 Focal Length
                             </div>
                             <div className="moreInfoExifInfo">
-                                {this.getInfo().exifFocalLength}mm
+                                {this.getInfo().exifFocalLength === null ? ("No Info") : this.getInfo().exifFocalLength}mm
                             </div>
                         </div>
                         <div className="moreInfoExif">
@@ -254,7 +254,7 @@ class PopUp extends React.Component {
                                 Aperture
                             </div>
                             <div className="moreInfoExifInfo">
-                                ƒ/{this.getInfo().exifAperture}
+                                {this.getInfo().exifAperture === null ? ("No Info") : "ƒ/" + this.getInfo().exifAperture}
                             </div>
                         </div>
                         <div className="moreInfoExif">
@@ -262,7 +262,7 @@ class PopUp extends React.Component {
                                 ISO
                             </div>
                             <div className="moreInfoExifInfo">
-                                {this.getInfo().exifIso}
+                                {this.getInfo().exifIso === null ? ("No Info") : this.getInfo().exifIso}
                             </div>
                         </div>
                         <div className="moreInfoExif">
