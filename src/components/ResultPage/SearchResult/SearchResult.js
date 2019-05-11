@@ -37,8 +37,24 @@ class SearchResult extends React.Component {
     };
 
 
+    fetchRandomPhoto() {
+        let url = "https://api.unsplash.com/photos/random?count=15&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7";
+        axios.get(url)
+            .then(images => images.data)
+            .then(images => {
+                this.setState({
+                    photos: images,
+                    isLoading: false,
+                    pageCount:1,
+                    photoCount:15
+                });
+            })
+    }
+
     fetchPhoto() {
-        axios.get("https://api.unsplash.com/search/photos?page=" + this.state.currentPage + "&per_page=15&query=" + this.state.query + "&collections=" + this.state.collection + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7")
+
+        let url = "https://api.unsplash.com/search/photos?page=" + this.state.currentPage + "&per_page=15&query=" + this.state.query + "&collections=" + this.state.collection + "&client_id=10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7";
+        axios.get(url)
             .then(images => images.data)
             .then(images => {
                 this.setState({
@@ -54,7 +70,9 @@ class SearchResult extends React.Component {
     componentDidMount() {
         /*const API_KEY = "10d11e134a9e70f63d187381f726f1a5d86470b6cb3e5a5b4709181929b24bc7";
         const SECRET_KEY = "60664e6c8bee47b51c9128d3538418cee0cb777d892b9d2918857408d4422ee1";*/
-        this.fetchPhoto()
+        if (this.state.query === 'random') this.fetchRandomPhoto()
+        else
+            this.fetchPhoto()
     }
 
     queryHandler = () => {
