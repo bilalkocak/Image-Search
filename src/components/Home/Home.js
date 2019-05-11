@@ -70,9 +70,7 @@ class Home extends React.Component {
                                 <option value="335992">Wallpaper</option>
                                 <option value="281665">Architecture/Building</option>
                             </select>
-
                         </div>
-
 
                         <Link to={"/search/" + this.state.query + "/" + this.state.collection}>
                             <div className="searchButton">SEARCH</div>
