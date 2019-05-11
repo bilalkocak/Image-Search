@@ -1,3 +1,6 @@
+# Image Search
+![](https://github.com/bilalkocak/hipo-frontend-exercise/blob/master/ScreenShot/Scenerio.gif?raw=true)
+
 Bu proje  [Create React App](https://github.com/facebook/create-react-app) ile yapıldı.
 
 ## Web üzerinde çalışır hali
@@ -13,11 +16,8 @@ Bu proje  [Create React App](https://github.com/facebook/create-react-app) ile y
 
 ------------
 
-Dosyaların bulunduğu dizine girip
+Dosyaların bulunduğu dizine girip  `npm start` komutunu çalıştırın.
 
-### `npm start`
-
-Uygulamayı geliştirici modda çalıştır.<br>
 Tarayıcıda [localhost:3000](http://localhost:3000) adresini açınca uygulama çalışıyor olacak.
 
 
