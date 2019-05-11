@@ -67,12 +67,12 @@
   background-repeat: no-repeat;
   padding-left: 20px;
   border: none;
+  margin-bottom: 75px;
 
 }
 
 .searchButton{
   width: 246px;
-  margin-top: 75px;
   background: #2A2B8D;
   border-radius: 25px;
   font-size: 14px;
