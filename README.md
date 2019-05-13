@@ -16,7 +16,7 @@ Bu proje  [Create React App](https://github.com/facebook/create-react-app) ile y
 
 ------------
 
-Dosyaların bulunduğu dizine girip  `npm start` komutunu çalıştırın.
+Dosyaların bulunduğu dizine girip `npm install` ve `npm start` komutlarını çalıştırın.
 
 Tarayıcıda [localhost:3000](http://localhost:3000) adresini açınca uygulama çalışıyor olacak.
 
@@ -30,7 +30,7 @@ Tarayıcıda [localhost:3000](http://localhost:3000) adresini açınca uygulama 
 
 Önceden belirlenen belli `collectionlar` içinde aratılacak anahtar kelime `query` bölümüne yazılarak arama yapılır.
 
-- Eğer `query` girilmiş ise search butonu sizi '/search/:query/:collection' routeuna yönlendirir ve değerle doğrultusunda sonuçlar getirir.
+- Eğer `query` girilmiş ise search butonu sizi '/search/:query/:collection' routeuna yönlendirir ve değerler doğrultusunda sonuçlar getirir.
 
 - Eğer girilmeden butona basılmışsa '/search/random' adresinde yönlendirerek random 15 görsel getirir.
 
